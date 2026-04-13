@@ -65,3 +65,31 @@ footer {
     color: white;
     margin-top: 30px;
 }
+/* Center the whole button group */
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px;
+}
+
+/* Make buttons bigger */
+.filters button {
+    padding: 15px 25px;
+    font-size: 16px;
+    border: none;
+    background: #555;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+/* Hover + active effect */
+.filters button:hover,
+.filters button.active {
+    background: #2c3e50;
+    transform: scale(1.05);
+}
+
