@@ -6,27 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
-<script>
-function filterImages(category, btn) {
-    let items = document.getElementsByClassName("gallery-item");
 
-    for (let i = 0; i < items.length; i++) {
-        if (category === "all") {
-            items[i].style.display = "block";
-        } else {
-            if (items[i].classList.contains(category)) {
-                items[i].style.display = "block";
-            } else {
-                items[i].style.display = "none";
-            }
-        }
-    }
-
-    let buttons = document.querySelectorAll(".filters button");
-    buttons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-}
-</script>
 <body>
 
 <header>
@@ -40,7 +20,7 @@ function filterImages(category, btn) {
 
 <!-- Filter Buttons -->
 <div class="filters">
-    <button onclick="filterImages('all')" class="active">All</button>
+    <button onclick="filterImages('all', this)" class="active">All</button>
     <button onclick="filterImages('astro', this)">Astro Photography</button>
     <button onclick="filterImages('marching', this)">Marching Band Photography</button>
     <button onclick="filterImages('landscape', this)">Landscape Photography</button>
@@ -71,6 +51,27 @@ function filterImages(category, btn) {
 
 </div>
 
+<script>
+function filterImages(category, btn) {
+    let items = document.getElementsByClassName("gallery-item");
+
+    for (let i = 0; i < items.length; i++) {
+        if (category === "all") {
+            items[i].style.display = "block";
+        } else {
+            if (items[i].classList.contains(category)) {
+                items[i].style.display = "block";
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+    }
+
+    let buttons = document.querySelectorAll(".filters button");
+    buttons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+}
+</script>
 
 </body>
 </html>
