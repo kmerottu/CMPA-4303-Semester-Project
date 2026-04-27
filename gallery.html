@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawk Eye Photography</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: #222;
+            color: white;
+            padding: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .filters {
+            margin: 20px;
+        }
+
+        .filters button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .filters button.active {
+            font-weight: bold;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .gallery-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .stars {
+            margin-top: 10px;
+            font-size: 28px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .star {
+            color: #ccc;
+        }
+
+        .star.active {
+            color: gold;
+        }
+
+        .rating-text {
+            margin-top: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Hawk Eye Photography</h1>
+    <nav>
+        <a href="index.html">Home</a> |
+        <a href="about.html">About</a> |
+        <a href="gallery.html">Gallery</a>
+    </nav>
+</header>
+
+<div class="filters">
+    <button onclick="filterImages('all', this)" class="active">All</button>
+    <button onclick="filterImages('astro', this)">Astro Photography</button>
+    <button onclick="filterImages('marching', this)">Marching Band Photography</button>
+    <button onclick="filterImages('landscape', this)">Landscape Photography</button>
+</div>
+
+<div class="gallery">
+
+    <div class="gallery-item astro">
+        <img src="images/photo1.jpg" alt="Astro Photo">
+        <div class="stars" data-id="1"></div>
+        <p class="rating-text" id="rating-1">No rating yet</p>
+    </div>
+
+    <div class="gallery-item marching">
+        <img src="images/photo2.jpg" alt="Marching Band Photo">
+        <div class="stars" data-id="2"></div>
+        <p class="rating-text" id="rating-2">No rating yet</p>
+    </div>
+
+    <div class="gallery-item landscape">
+        <img src="images/photo3.jpg" alt="Landscape Photo">
+        <div class="stars" data-id="3"></div>
+        <p class="rating-text" id="rating-3">No rating yet</p>
+    </div>
+
+    <div class="gallery-item astro">
+        <img src="images/photo4.jpg" alt="Astro Photo 2">
+        <div class="stars" data-id="4"></div>
+        <p class="rating-text" id="rating-4">No rating yet</p>
+    </div>
+
+    <div class="gallery-item marching">
+        <img src="images/photo5.jpg" alt="Marching Band Photo 2">
+        <div class="stars" data-id="5"></div>
+        <p class="rating-text" id="rating-5">No rating yet</p>
+    </div>
+
+</div>
+
+<script>
+function filterImages(category, btn) {
+    let items = document.getElementsByClassName("gallery-item");
+
+    for (let i = 0; i < items.length; i++) {
+        if (category === "all") {
+            items[i].style.display = "block";
+        } else {
+            if (items[i].classList.contains(category)) {
+                items[i].style.display = "block";
+            } else {
+                items[i].style.display = "none";
+            }
+        }
+    }
+
+    let buttons = document.querySelectorAll(".filters button");
+    buttons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+}
+
+const starContainers = document.querySelectorAll('.stars');
+
+starContainers.forEach(container => {
+    const id = container.dataset.id;
+    let savedRating = localStorage.getItem(`rating-${id}`) || 0;
+
+    for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.innerHTML = '★';
+        star.classList.add('star');
+
+        if (i <= savedRating) {
+            star.classList.add('active');
+        }
+
+        star.addEventListener('click', () => {
+            localStorage.setItem(`rating-${id}`, i);
+            updateStars(container, i);
+            updateText(id, i);
+        });
+
+        container.appendChild(star);
+    }
+
+    updateText(id, savedRating);
+});
+
+function updateStars(container, rating) {
+    const stars = container.querySelectorAll('.star');
+    stars.forEach((star, index) => {
+        if (index < rating) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+}
+
+function updateText(id, rating) {
+    const text = document.getElementById(`rating-${id}`);
+    text.textContent = rating > 0
+        ? `Current Rating: ${rating}/5 Stars`
+        : 'No rating yet';
+}
+</script>
+
+</body>
+</html>
