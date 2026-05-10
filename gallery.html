@@ -1,76 +1,394 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <link rel="stylesheet" href="styles.css"> 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
 
-</head>
-<script>
-function filterImages(category, btn) {
-    let items = document.getElementsByClassName("gallery-item");
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    for (let i = 0; i < items.length; i++) {
-        if (category === "all") {
-            items[i].style.display = "block";
-        } else {
-            if (items[i].classList.contains(category)) {
-                items[i].style.display = "block";
-            } else {
-                items[i].style.display = "none";
-            }
+    <title>Hawk Eye Photography</title>
+
+    <style>
+
+        body{
+            margin:0;
+            font-family:Arial, sans-serif;
+            background:#f4f4f4;
         }
-    }
 
-    let buttons = document.querySelectorAll(".filters button");
-    buttons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
+        header{
+            background:#222;
+            color:white;
+            text-align:center;
+            padding:20px;
+        }
+
+        nav a{
+            color:white;
+            text-decoration:none;
+            margin:0 10px;
+        }
+
+        /* FILTER BUTTONS */
+
+        .filters{
+            text-align:center;
+            margin:25px 0;
+        }
+
+        .filters button{
+            padding:10px 18px;
+            margin:5px;
+            border:none;
+            border-radius:8px;
+            background:white;
+            cursor:pointer;
+            transition:0.3s;
+            font-size:15px;
+        }
+
+        .filters button:hover{
+            background:#333;
+            color:white;
+        }
+
+        .filters button.active{
+            background:#222;
+            color:white;
+        }
+
+        /* GALLERY */
+
+        .gallery{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:25px;
+            padding:30px;
+            max-width:1300px;
+            margin:auto;
+        }
+
+        .gallery-item{
+            background:white;
+            border-radius:15px;
+            overflow:hidden;
+            box-shadow:0 4px 12px rgba(0,0,0,0.1);
+            transition:0.3s;
+        }
+
+        .gallery-item:hover{
+            transform:translateY(-5px);
+        }
+
+        /* IMAGE SIZE */
+
+        .gallery-item img{
+    width:100%;
+    height:350px;
+    object-fit:contain;
+    background:#eee;
+    display:block;
 }
-</script>
+
+        /* PHOTO INFO */
+
+        .photo-info{
+            padding:18px;
+            text-align:left;
+        }
+
+        .photo-info h3{
+            margin-top:0;
+            margin-bottom:10px;
+            color:#222;
+        }
+
+        .photo-info p{
+            color:#555;
+            line-height:1.5;
+            font-size:15px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:768px){
+
+            .gallery{
+                grid-template-columns:1fr;
+                padding:15px;
+            }
+
+            .gallery-item img{
+                height:250px;
+            }
+
+        }
+
+    </style>
+</head>
+
 <body>
 
 <header>
+
     <h1>Hawk Eye Photography</h1>
+
     <nav>
         <a href="index.html">Home</a> |
         <a href="about.html">About</a> |
         <a href="gallery.html">Gallery</a>
     </nav>
+
 </header>
 
-<!-- Filter Buttons -->
+<!-- FILTER BUTTONS -->
+
 <div class="filters">
-    <button onclick="filterImages('all')" class="active">All</button>
-    <button onclick="filterImages('astro', this)">Astro Photography</button>
-    <button onclick="filterImages('marching', this)">Marching Band Photography</button>
-    <button onclick="filterImages('landscape', this)">Landscape Photography</button>
+
+    <button onclick="filterImages('all', this)" class="active">
+        All
+    </button>
+
+    <button onclick="filterImages('astro', this)">
+        Astro Photography
+    </button>
+
+    <button onclick="filterImages('marching', this)">
+        Marching Band Photography
+    </button>
+
+    <button onclick="filterImages('landscape', this)">
+        Landscape Photography
+    </button>
+
 </div>
 
-<!-- Gallery -->
+<!-- GALLERY -->
+
 <div class="gallery">
 
+    <!-- PHOTO 1 -->
+
     <div class="gallery-item astro">
-        <img src="images/photo1.jpg">
+
+        <img src="images/photo1.jpg" alt="Astro Photography">
+
+        <div class="photo-info">
+
+            <h3>Midnight Sky</h3>
+
+            <p>
+                A stunning view of the night sky filled with stars and Milky Way as captured in Ft. Davis @ McDonald Observatory
+                captured during a clear evening in the countryside.
+            </p>
+
+        </div>
+
     </div>
 
+    <!-- PHOTO 2 -->
+
     <div class="gallery-item marching">
-        <img src="images/photo2.jpg">
+
+        <img src="images/photo2.jpg" alt="Marching Band">
+
+        <div class="photo-info">
+
+            <h3>Friday Night Performance</h3>
+
+            <p>
+                The marching band performing under friday night lights
+                during  halftime.
+            </p>
+
+        </div>
+
     </div>
+
+    <!-- PHOTO 3 -->
 
     <div class="gallery-item landscape">
-        <img src="images/photo3.jpg">
+
+        <img src="images/photo3.jpg" alt="Landscape Photography">
+
+        <div class="photo-info">
+
+            <h3>Mountain Escape</h3>
+
+            <p>
+                A peaceful mountain landscape showcasing natural beauty,
+                vibrant colors, and scenic depth.
+            </p>
+
+        </div>
+
     </div>
+
+    <!-- PHOTO 4 -->
 
     <div class="gallery-item astro">
-        <img src="images/photo4.jpg">
+
+        <img src="images/photo4.jpg" alt="Astro Photography">
+
+        <div class="photo-info">
+
+            <h3>Galactic Horizon</h3>
+
+            <p>
+                Long-exposure photography capturing the Milky Way
+                stretching across the horizon at night.
+            </p>
+
+        </div>
+
     </div>
 
+    <!-- PHOTO 5 -->
+
     <div class="gallery-item marching">
-        <img src="images/photo5.jpg">
+
+        <img src="images/photo5.jpg" alt="Marching Band Photography">
+
+        <div class="photo-info">
+
+            <h3>Precision and Rhythm</h3>
+
+            <p>
+                A close-up action shot highlighting the coordination,
+                focus, and movement of the marching band.
+            </p>
+
+        </div>
+
+    </div>
+<!-- PHOTO 6 -->
+
+<div class="gallery-item marching">
+
+    <img src="images/photo6.jpg" alt="Marching Band Photography">
+
+    <div class="photo-info">
+
+        <h3>Texas State UIL Marching Championship</h3>
+
+        <p>
+            The drum battery starting the show.
+        </p>
+
     </div>
 
 </div>
 
+<!-- PHOTO 7 -->
+
+<div class="gallery-item marching">
+
+    <img src="images/photo7.jpg" alt="Marching Band Photography">
+
+    <div class="photo-info">
+
+        <h3>Creating Memories</h3>
+
+        <p>
+            My baby boy after a marching show.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- PHOTO 8 -->
+
+<div class="gallery-item marching">
+
+    <img src="images/photo8.jpg" alt="Marching Band Performance">
+
+    <div class="photo-info">
+
+        <h3>Halftime Energy</h3>
+
+        <p>
+            The marching band delivering an energetic performance
+            during a packed Friday night football game.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- PHOTO 9 -->
+
+<div class="gallery-item marching">
+
+    <img src="images/photo9.jpg" alt="Marching Band Photography">
+
+    <div class="photo-info">
+
+        <h3>Halftime Dance Show</h3>
+
+        <p>
+            My daughter putting on her own show at halftime under the friday night lights.
+        </p>
+
+    </div>
+
+</div>
+
+<!-- PHOTO 10 -->
+
+<div class="gallery-item landscape">
+
+    <img src="images/photo10.jpg" alt="Landscape Photography">
+
+    <div class="photo-info">
+
+        <h3>Calm Mornings</h3>
+
+        <p>
+           The Las Vegas Strip in the early morning sunrise.
+        </p>
+
+    </div>
+
+</div>
+</div>
+
+<!-- FILTER SCRIPT -->
+
+<script>
+
+function filterImages(category, btn){
+
+    let items = document.querySelectorAll(".gallery-item");
+
+    items.forEach(item => {
+
+        if(category === "all" || item.classList.contains(category)){
+
+            item.style.display = "block";
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
+
+    let buttons = document.querySelectorAll(".filters button");
+
+    buttons.forEach(button => {
+
+        button.classList.remove("active");
+
+    });
+
+    btn.classList.add("active");
+
+}
+
+</script>
 
 </body>
 </html>
