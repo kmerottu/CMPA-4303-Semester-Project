@@ -8,5 +8,5 @@ I used Visual Studio Code to build the code for the website. I viewed example of
 ## How To Access The Website
 https://kmerottu.github.io/CMPA-4303-Semester-Project/
 ## What Changed From Project 01 to Project 02
-I have added much more photos to the portfoilio. I have also added a rating system along with descriptions for each photo so my audience knows what the photo i all about.
+I have added much more photos to the portfoilio. I added a rating system as an enhancement but ultimately decided it hurt my website and took that off. I did add descriptions to all my photos at the suggestions from peer review. I also changed how the photos presented to make a much cleaner look.
 
